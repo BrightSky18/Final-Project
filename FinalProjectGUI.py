@@ -1,20 +1,32 @@
 from tkinter import *
 from tkinter import ttk,filedialog,messagebox
+from scipy.io import wavfile
+import scipy.io
+import matplotlib.pyplot as plt
+import numpy as np
+
 
 def fetch_audio():
     '''Implement a function to upload an audio file. Below is a test command. Delete later'''
     ##print('Upload file button CLICK')
     allowedfiletypes=('Audio Files','*.mp3','*.wav')
-    file_path = filedialog.askopenfilename(allowedfiletypes)
+    global file_path
+    file_path = filedialog.askopenfilename(filetypes=allowedfiletypes)
     if file_path:
         _audio.set(file_path)
+
     else:
         print("Error, please try again")
         _audio.set("Error, please select an audio file")
 
 def display_waveform():
     '''Implement a function to graph in waveform style. Below is a test command. Delete later'''
-    print('Waveform CLICK')
+    ##print('Waveform CLICK')
+    #sample_rate, data=wavfile.read(file_path)
+    #t=np.linspace(0,len(data)/sample_rate,len(data), endpoint=False)
+    #plt.figure(2)
+    #plt.plot(t,data,linewidth=1,alpha=0.6,color='004bc6')
+
 
 def display_lowRT():
     '''Implement a function to graph in low RT60 style. Below is a test command. Delete later'''
