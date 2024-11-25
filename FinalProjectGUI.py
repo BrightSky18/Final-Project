@@ -9,7 +9,7 @@ import numpy as np
 def fetch_audio():
     '''Implement a function to upload an audio file. Below is a test command. Delete later'''
     ##print('Upload file button CLICK')
-    allowedfiletypes=('Audio Files','*.mp3','*.wav')
+    allowedfiletypes=[('Audio Files','*.mp3;*.wav')]
     global file_path
     file_path = filedialog.askopenfilename(filetypes=allowedfiletypes)
     if file_path:
