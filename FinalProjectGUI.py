@@ -1,5 +1,7 @@
 from tkinter import *
 from tkinter import ttk,filedialog,messagebox
+
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from scipy.io import wavfile
 import scipy.io
 import matplotlib.pyplot as plt
@@ -10,6 +12,7 @@ def fetch_audio():
     '''Implement a function to upload an audio file. Below is a test command. Delete later'''
     ##print('Upload file button CLICK')
     allowedfiletypes=[('Audio Files','*.mp3;*.wav')]
+    ##Still need to convert mp3 files to wav format
     global file_path
     file_path = filedialog.askopenfilename(filetypes=allowedfiletypes)
     if file_path:
@@ -22,10 +25,21 @@ def fetch_audio():
 def display_waveform():
     '''Implement a function to graph in waveform style. Below is a test command. Delete later'''
     ##print('Waveform CLICK')
-    #sample_rate, data=wavfile.read(file_path)
-    #t=np.linspace(0,len(data)/sample_rate,len(data), endpoint=False)
-    #plt.figure(2)
-    #plt.plot(t,data,linewidth=1,alpha=0.6,color='004bc6')
+    sample_rate, data=wavfile.read(file_path)
+    t=np.linspace(0,len(data)/sample_rate,len(data), endpoint=False)
+    plt.figure()
+    plt.plot(t,data,label='Waveform', color='blue')
+    plt.title('Waveform')
+    plt.xlabel('Time (s)')
+    plt.ylabel('Amplitude (dB)')
+    plt.grid(True)
+    plt.legend()
+    plt.show() ##test to show if plot works
+    ##canvas=FigureCanvasTkAgg(plt.gcf(), master=_root)
+    ##canvas.draw()
+    ##canvas.get_tk_widget().pack()
+
+
 
 
 def display_lowRT():
@@ -55,6 +69,7 @@ if __name__ == "__main__": # execute logic if run directly
 
 #The below is all setting up the main window and the area to choose a file
 #ALL CAPS LINE TO SHOW THE ABOVE IS A HEADING COMMENT. TAKE NOTE.
+    global _root
     _root = Tk() # instantiate instance of Tk class
     _root.title('WAV Analysis')
     _mainframe = ttk.Frame(_root, padding='5 5 5 5 ') # root is parent of frame
