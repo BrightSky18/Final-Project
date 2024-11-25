@@ -3,7 +3,14 @@ from tkinter import ttk,filedialog,messagebox
 
 def fetch_audio():
     '''Implement a function to upload an audio file. Below is a test command. Delete later'''
-    print('Upload file button CLICK')
+    ##print('Upload file button CLICK')
+    allowedfiletypes=('Audio Files','*.mp3','*.wav')
+    file_path = filedialog.askopenfilename(allowedfiletypes)
+    if file_path:
+        _audio.set(file_path)
+    else:
+        print("Error, please try again")
+        _audio.set("Error, please select an audio file")
 
 def display_waveform():
     '''Implement a function to graph in waveform style. Below is a test command. Delete later'''
