@@ -19,6 +19,26 @@ def fetch_audio():
         print("Error, please try again")
         _audio.set("Error, please select an audio file")
 
+    ##displays Audio File/Analysis data 
+
+    #gets variable t, which is a 2 decimal float of the length of the audio file in seconds
+    #sample rates is the Hz
+    sample_rate, data = wavfile.read(file_path) 
+    len_data = len(data)  # holds length of the numpy array 
+    t = round(len_data / sample_rate, 2)  # returns duration but in floats and with 2 decimal places
+
+    #converts sample_rates to kHz and rounds the value to 2 decimal places
+    kHz = round(sample_rate/1000, 2)
+
+    #text with value and unit
+    length = str(t) + ' seconds'
+    Frequency = str(kHz) + " kHz"
+
+    #outputs length
+    _time.set(length)
+    #outputs kHz
+    _res.set(Frequency)
+
 def display_waveform():
     '''Implement a function to graph in waveform style. Below is a test command. Delete later'''
     ##print('Waveform CLICK')
