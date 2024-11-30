@@ -42,7 +42,6 @@ def fetch_audio():
 
 def display_waveform():
 
-
     sample_rate, data=wavfile.read(file_path)
     t=np.linspace(0,len(data)/sample_rate,len(data), endpoint=False)
     plt.figure()
