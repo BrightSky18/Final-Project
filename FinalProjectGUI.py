@@ -9,8 +9,6 @@ import numpy as np
 
 
 def fetch_audio():
-    '''Implement a function to upload an audio file. Below is a test command. Delete later'''
-    ##print('Upload file button CLICK')
     allowedfiletypes=[('Audio Files','*.mp3;*.wav')]
     ##Still need to convert mp3 files to wav format
     global file_path
@@ -23,8 +21,8 @@ def fetch_audio():
         _audio.set("Error, please select an audio file")
 
 def display_waveform():
-    '''Implement a function to graph in waveform style. Below is a test command. Delete later'''
-    ##print('Waveform CLICK')
+
+
     sample_rate, data=wavfile.read(file_path)
     t=np.linspace(0,len(data)/sample_rate,len(data), endpoint=False)
     plt.figure()
@@ -35,6 +33,9 @@ def display_waveform():
     plt.grid(True)
     plt.legend()
     plt.show() ##test to show if plot works
+    ##Still need to ensure it works with mp3, can handle multichannel audio, and optionally implement it into the gui.
+
+    #Code below is meant to implement the plot into the gui but is nonfunctional currently.
     ##canvas=FigureCanvasTkAgg(plt.gcf(), master=_root)
     ##canvas.draw()
     ##canvas.get_tk_widget().pack()
