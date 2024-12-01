@@ -6,6 +6,7 @@ from scipy.io import wavfile
 import scipy.io
 import matplotlib.pyplot as plt
 import numpy as np
+from scipy.signal import butter,filtfilt
 
 
 def fetch_audio():
@@ -59,12 +60,67 @@ def display_waveform():
     ##canvas.draw()
     ##canvas.get_tk_widget().pack()
 
-
-
+##Def used for display_lowRT
+def find_nearest_value(array, value):
+    array = np.asarray(array)
+    idx=(np.abs(array - value)).argmin()
+    return array[idx]
 
 def display_lowRT():
-    '''Implement a function to graph in low RT60 style. Below is a test command. Delete later'''
-    print('Low CLICK')
+    '''Needs to ensure that this displays lowRT correctly, then complete the other defs'''
+    sample_rate, data=wavfile.read(file_path)
+    if len(data.shape)==2:
+        left_channel=data[:,0]
+        right_channel=data[:,1]
+        data=(left_channel+right_channel)/2
+    else:
+        data=data
+    t = np.linspace(0,len(data)/sample_rate,len(data), endpoint=False)
+    fft_result=np.fft.fft(data)
+    spectrum=np.abs(fft_result)
+    freqs=np.fft.fftfreq(len(data), d=1/sample_rate)
+    freqs=freqs[:len(freqs)//2]
+    spectrum=spectrum[:len(spectrum)//2]
+
+    ##find_Target_frequency
+    target=1001
+    nearest_freq=freqs[np.abs(freqs-target).argmin()] ##End of find_Target_Frequency
+    target_frequency=nearest_freq
+    nyquist=0.5* (sample_rate)
+    order=4
+    low= (target_frequency-50)/nyquist
+    high=(target_frequency+50)/nyquist
+    b,a= butter(order, [low,high], btype='band')
+    filtered_data=filtfilt(b, a, data)
+    data_in_db=10*np.log10(np.abs(filtered_data)+1e-10)
+    plt.figure(2)
+    plt.plot(t, data_in_db, linewidth=1,alpha=0.7,color='blue')
+    plt.title('Low-RT Signal')
+    plt.xlabel('Time (s)')
+    plt.ylabel('Power (dB)')
+    index_of_max=np.argmax(data_in_db)
+    value_of_max=data_in_db[index_of_max]
+    plt.plot(t[index_of_max],data_in_db[index_of_max], 'go')
+    sliced_array=data_in_db[index_of_max:]
+    value_of_max_less_5=value_of_max-5
+    value_of_max_less_5=find_nearest_value(sliced_array,value_of_max_less_5)
+    index_of_max_less_5=np.where(data_in_db == value_of_max_less_5)[0][0]
+    plt.plot(t[index_of_max_less_5], data_in_db[index_of_max_less_5], 'yo')
+    value_of_max_less_25=value_of_max-25
+    value_of_max_less_25=find_nearest_value(sliced_array,value_of_max_less_25)
+    index_of_max_less_25=np.where(data_in_db == value_of_max_less_25)[0][0]
+    plt.plot(t[index_of_max_less_25], data_in_db[index_of_max_less_25], 'ro')
+    rt20=t[index_of_max_less_5]-t[index_of_max_less_25]
+    rt60=3*rt20
+    plt.grid()
+    plt.show()
+    print(f'The RT60 reverb time at freq {int(target_frequency)}Hz is {round(abs(rt60),2)} seconds')
+
+
+
+
+
+
 
 def display_midRT():
     '''Implement a function to graph in mid RT60 style. Below is a test command. Delete later'''
