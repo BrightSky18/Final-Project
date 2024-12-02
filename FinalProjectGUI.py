@@ -13,8 +13,12 @@ def fetch_audio():
     allowedfiletypes=[('Audio Files','*.mp3;*.wav')]
     global file_path
     file_path = filedialog.askopenfilename(filetypes=allowedfiletypes)
-    if file_path:
+   ##checks file type. if mp3, convert to wav. if neither, errors
+
+    if file_path.endswith('.wav'):
+
         _audio.set(file_path)
+
     elif file_path.endswith('.mp3'):
         # Load the MP3 file
         sound = AudioSegment.from_mp3(file_path)
@@ -23,10 +27,10 @@ def fetch_audio():
         sound.export("usable_wav_audio_file.wav", format="wav")
         _audio.set(file_path)
         file_path = "usable_wav_audio_file.wav"
+
     else:
         print("Error, please try again")
         _audio.set("Error, please select an audio file")
-
     ##displays Audio File/Analysis data 
 
     #gets variable t, which is a 2 decimal float of the length of the audio file in seconds
