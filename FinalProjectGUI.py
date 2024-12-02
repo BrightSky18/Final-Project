@@ -52,13 +52,13 @@ def display_waveform():
     plt.ylabel('Amplitude (dB)')
     plt.grid(True)
     plt.legend()
-    plt.show() ##test to show if plot works
+    ##plt.show() ##test to show if plot works
     ##Still need to ensure it works with mp3, can handle multichannel audio, and optionally implement it into the gui.
 
     #Code below is meant to implement the plot into the gui but is nonfunctional currently.
-    ##canvas=FigureCanvasTkAgg(plt.gcf(), master=_root)
-    ##canvas.draw()
-    ##canvas.get_tk_widget().pack()
+    canvas=FigureCanvasTkAgg(plt.gcf(), master=_root)
+    canvas.draw()
+    canvas.get_tk_widget().grid()
 
 ##Def used for display_lowRT
 def find_nearest_value(array, value):
@@ -112,8 +112,9 @@ def display_lowRT():
     plt.plot(t[index_of_max_less_25], data_in_db[index_of_max_less_25], 'ro')
     rt20=t[index_of_max_less_5]-t[index_of_max_less_25]
     rt60=3*rt20
-    plt.grid()
-    plt.show()
+    canvas = FigureCanvasTkAgg(plt.gcf(), master=_root)
+    canvas.draw()
+    canvas.get_tk_widget().grid()
     print(f'The RT60 reverb time at freq {int(target_frequency)}Hz is {round(abs(rt60),2)} seconds')
 
 
@@ -169,21 +170,13 @@ if __name__ == "__main__": # execute logic if run directly
     _audioFile_btn.grid(row=0, column=1, sticky=W, padx=5)
 
 
-#The below frame will hold the graph. THIS WILL HAVE TO CHANGE THE LISTBOX TO SOMETHING ELSE. I DO NOT KNOW WHAT
-#ALL CAPS LINE TO SHOW THE ABOVE IS A HEADING COMMENT. TAKE NOTE.
-    _graphs_frame = ttk.LabelFrame(
-        _mainframe, text='Graphing', padding='9 0 0 0')
-    _graphs_frame.grid(row=1, column=0, sticky=(N, S, E, W))
 
-    _graph_display = Listbox( #REPLACE THIS LISTBOX. KEEP HEIGHT AND WIDTH THE SAME(12,55)
-        _graphs_frame, listvariable=x, height=12, width=55)
-    _graph_display.grid(row=0, column=0, sticky=(E, W), pady=5)
 
 #The following are the buttons to display different graphs. Each will require separate implementation functions
 # ALL CAPS LINE TO SHOW THE ABOVE IS A HEADING COMMENT. TAKE NOTE.
     _buttons_frame = ttk.LabelFrame(
         _mainframe, text='Select Graph Type', padding='9 0 0 0')
-    _buttons_frame.grid(row=1, column=1, sticky=(N, S, E, W))
+    _buttons_frame.grid(row=1, column=0, sticky=(N, S, E, W))
 
 
     _waveform_btn = ttk.Button(
