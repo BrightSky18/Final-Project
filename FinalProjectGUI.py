@@ -9,7 +9,7 @@ import numpy as np
 from pydub import AudioSegment
 from scipy.signal import butter,filtfilt
 
-
+canvas=None
 def fetch_audio():
     allowedfiletypes=[('Audio Files','*.mp3;*.wav')]
     ##Still need to convert mp3 files to wav format
@@ -33,6 +33,7 @@ def fetch_audio():
     else:
         print("Error, please try again")
         _audio.set("Error, please select an audio file")
+
     ##displays Audio File/Analysis data 
 
     #gets variable t, which is a 2 decimal float of the length of the audio file in seconds
@@ -53,8 +54,16 @@ def fetch_audio():
     #outputs kHz
     _res.set(Frequency)
 
-def display_waveform():
+def clear_canvas():
+    global canvas
+    if canvas:
+        canvas.get_tk_widget().destroy()
+        canvas = None
+    plt.clf()
 
+def display_waveform():
+    global canvas
+    clear_canvas()
     sample_rate, data=wavfile.read(file_path)
     t=np.linspace(0,len(data)/sample_rate,len(data), endpoint=False)
     plt.figure()
@@ -80,6 +89,8 @@ def find_nearest_value(array, value):
 
 def display_lowRT():
     '''Needs to ensure that this displays lowRT correctly, then complete the other defs'''
+    global canvas
+    clear_canvas()
     sample_rate, data=wavfile.read(file_path)
     if len(data.shape)==2:
         left_channel=data[:,0]
