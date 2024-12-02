@@ -4,6 +4,7 @@ from scipy.io import wavfile
 import scipy.io
 import matplotlib.pyplot as plt
 import numpy as np
+from pydub import AudioSegment
 
 
 def fetch_audio():
@@ -14,7 +15,14 @@ def fetch_audio():
     file_path = filedialog.askopenfilename(filetypes=allowedfiletypes)
     if file_path:
         _audio.set(file_path)
+    elif file_path.endswith('.mp3'):
+        # Load the MP3 file
+        sound = AudioSegment.from_mp3(file_path)
 
+        # Export as WAV
+        sound.export("usable_wav_audio_file.wav", format="wav")
+        _audio.set(file_path)
+        file_path = "usable_wav_audio_file.wav"
     else:
         print("Error, please try again")
         _audio.set("Error, please select an audio file")
