@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.signal import butter,filtfilt
 
-
+canvas=None
 def fetch_audio():
     allowedfiletypes=[('Audio Files','*.mp3;*.wav')]
     ##Still need to convert mp3 files to wav format
@@ -21,12 +21,12 @@ def fetch_audio():
         print("Error, please try again")
         _audio.set("Error, please select an audio file")
 
-    ##displays Audio File/Analysis data 
+    ##displays Audio File/Analysis data
 
     #gets variable t, which is a 2 decimal float of the length of the audio file in seconds
     #sample rates is the Hz
-    sample_rate, data = wavfile.read(file_path) 
-    len_data = len(data)  # holds length of the numpy array 
+    sample_rate, data = wavfile.read(file_path)
+    len_data = len(data)  # holds length of the numpy array
     t = round(len_data / sample_rate, 2)  # returns duration but in floats and with 2 decimal places
 
     #converts sample_rates to kHz and rounds the value to 2 decimal places
@@ -41,8 +41,16 @@ def fetch_audio():
     #outputs kHz
     _res.set(Frequency)
 
-def display_waveform():
+def clear_canvas():
+    global canvas
+    if canvas:
+        canvas.get_tk_widget().destroy()
+        canvas = None
+    plt.clf()
 
+def display_waveform():
+    global canvas
+    clear_canvas()
     sample_rate, data=wavfile.read(file_path)
     t=np.linspace(0,len(data)/sample_rate,len(data), endpoint=False)
     plt.figure()
@@ -68,6 +76,8 @@ def find_nearest_value(array, value):
 
 def display_lowRT():
     '''Needs to ensure that this displays lowRT correctly, then complete the other defs'''
+    global canvas
+    clear_canvas()
     sample_rate, data=wavfile.read(file_path)
     if len(data.shape)==2:
         left_channel=data[:,0]
@@ -228,4 +238,3 @@ if __name__ == "__main__": # execute logic if run directly
 
 
     _root.mainloop() # listens for events, blocks any code that comes after it
-
