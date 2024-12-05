@@ -140,7 +140,6 @@ def display_lowRT():
     print(f'The RT60 reverb time at freq {int(target_frequency)}Hz is {round(abs(rt60),2)} seconds')
 
 
-
 def display_midRT():
     '''Implement a function to graph in mid RT60 style. Below is a test command. Delete later'''
     global canvas
