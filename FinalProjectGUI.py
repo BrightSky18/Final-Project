@@ -141,10 +141,6 @@ def display_lowRT():
 
 
 
-
-
-
-
 def display_midRT():
     '''Implement a function to graph in mid RT60 style. Below is a test command. Delete later'''
     global canvas
