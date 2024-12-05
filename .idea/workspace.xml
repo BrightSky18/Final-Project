@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c8686f06-1740-4287-8ade-a01f88e8eb09" name="Changes" comment="Merged Spencer's Branch, adding the display of the length and frequency to the gui.">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="c8686f06-1740-4287-8ade-a01f88e8eb09" name="Changes" comment="Merged Jiovani's branch onto the master branch.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FinalProjectGUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinalProjectGUI.py" afterDir="false" />
     </list>
@@ -17,7 +16,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="LPJR's-Branch" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -30,8 +29,8 @@
 }</component>
   <component name="GithubPullRequestsUISettings"><![CDATA[{
   "selectedUrlAndAccountId": {
-    "url": "https://github.com/BrightSky18/Final-Project",
-    "accountId": "0bf4f315-4c6d-4a72-9ab7-ca369932f58f"
+    "url": "https://github.com/BrightSky18/Final-Project.git",
+    "accountId": "80efc705-2d89-4328-99c8-53aca4559ba2"
   }
 }]]></component>
   <component name="ProjectColorInfo">{
@@ -48,13 +47,14 @@
     "Python.FinalProjectGUI.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "JZ's-branch",
+    "git-widget-placeholder": "LPJR's-Branch",
     "ignore.virus.scanning.warn.message": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -76,6 +76,7 @@
       <updated>1732497016262</updated>
       <workItem from="1732497017362" duration="2000" />
       <workItem from="1733342213607" duration="2060000" />
+      <workItem from="1733434018699" duration="3976000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed file_path in fetch_audio">
       <option name="closed" value="true" />
@@ -93,7 +94,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733004684783</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Merged Jiovani's branch onto the master branch.">
+      <option name="closed" value="true" />
+      <created>1733433869844</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1733433869844</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -113,10 +122,11 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Fixed file_path in fetch_audio" />
     <MESSAGE value="Edited comments for clarity." />
-    <option name="LAST_COMMIT_MESSAGE" value="Edited comments for clarity." />
+    <MESSAGE value="Merged Jiovani's branch onto the master branch." />
+    <option name="LAST_COMMIT_MESSAGE" value="Merged Jiovani's branch onto the master branch." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/FinalProject$FinalProjectGUI.coverage" NAME="FinalProjectGUI Coverage Results" MODIFIED="1732505539992" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Final_Project$FinalProjectGUI.coverage" NAME="FinalProjectGUI Coverage Results" MODIFIED="1733344345474" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Final_Project$FinalProjectGUI.coverage" NAME="FinalProjectGUI Coverage Results" MODIFIED="1733436356378" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/FinalProject$FinalProjectGUI.coverage" NAME="FinalProjectGUI Coverage Results" MODIFIED="1733175311677" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
