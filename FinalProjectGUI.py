@@ -408,6 +408,8 @@ def highRTreturn():
 
 def display_comboRT():
     '''Implement a function to graph in combined RT60 style. Below is a test command. Delete later'''
+    global canvas
+    clear_canvas()
     LowRT=lowRTReturn()
     MidRT=midRTReturn()
     HighRT=highRTreturn()

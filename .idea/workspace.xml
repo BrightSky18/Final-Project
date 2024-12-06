@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c8686f06-1740-4287-8ade-a01f88e8eb09" name="Changes" comment="Merged Jiovani's branch onto the master branch.">
+    <list default="true" id="c8686f06-1740-4287-8ade-a01f88e8eb09" name="Changes" comment="Finished combined RT60, still need to do custom graph, and make waveform work with multiple channels">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FinalProjectGUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinalProjectGUI.py" afterDir="false" />
     </list>
@@ -76,7 +76,7 @@
       <updated>1732497016262</updated>
       <workItem from="1732497017362" duration="2000" />
       <workItem from="1733342213607" duration="2060000" />
-      <workItem from="1733434018699" duration="3976000" />
+      <workItem from="1733434018699" duration="6232000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed file_path in fetch_audio">
       <option name="closed" value="true" />
@@ -102,7 +102,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733433869844</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Finished combined RT60, still need to do custom graph, and make waveform work with multiple channels">
+      <option name="closed" value="true" />
+      <created>1733438469024</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1733438469024</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -123,10 +131,11 @@
     <MESSAGE value="Fixed file_path in fetch_audio" />
     <MESSAGE value="Edited comments for clarity." />
     <MESSAGE value="Merged Jiovani's branch onto the master branch." />
-    <option name="LAST_COMMIT_MESSAGE" value="Merged Jiovani's branch onto the master branch." />
+    <MESSAGE value="Finished combined RT60, still need to do custom graph, and make waveform work with multiple channels" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished combined RT60, still need to do custom graph, and make waveform work with multiple channels" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Final_Project$FinalProjectGUI.coverage" NAME="FinalProjectGUI Coverage Results" MODIFIED="1733436356378" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Final_Project$FinalProjectGUI.coverage" NAME="FinalProjectGUI Coverage Results" MODIFIED="1733500904863" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/FinalProject$FinalProjectGUI.coverage" NAME="FinalProjectGUI Coverage Results" MODIFIED="1733175311677" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
