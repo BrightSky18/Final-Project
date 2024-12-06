@@ -63,7 +63,13 @@ def clear_canvas():
 def display_waveform():
     global canvas
     clear_canvas()
-    sample_rate, data=wavfile.read(file_path)
+    sample_rate, data = wavfile.read(file_path)
+    if len(data.shape) == 2:
+        left_channel = data[:, 0]
+        right_channel = data[:, 1]
+        data = (left_channel + right_channel) / 2
+    else:
+        data = data
     t=np.linspace(0,len(data)/sample_rate,len(data), endpoint=False)
     plt.figure()
     plt.plot(t,data,label='Waveform', color='blue')
@@ -430,9 +436,79 @@ def display_comboRT():
 
 
 
-def display_ultra():
+def display_ultralow():
     '''Implement a function to graph in a style we choose. Below is a test command. Delete later'''
-    print("ULTRA COOL THING")
+    global canvas
+    clear_canvas()
+    sample_rate, data = wavfile.read(file_path)
+    if len(data.shape) == 2:
+        left_channel = data[:, 0]
+        right_channel = data[:, 1]
+        data = (left_channel + right_channel) / 2
+    else:
+        data = data
+    t = np.linspace(0, len(data) / sample_rate, len(data), endpoint=False)
+    fft_result = np.fft.fft(data)
+    spectrum = np.abs(fft_result)
+    freqs = np.fft.fftfreq(len(data), d=1 / sample_rate)
+    freqs = freqs[:len(freqs) // 2]
+    spectrum = spectrum[:len(spectrum) // 2]
+
+    ##find_Target_frequency
+    target = 75
+    nearest_freq = freqs[np.abs(freqs - target).argmin()]  ##End of find_Target_Frequency
+    target_frequency = nearest_freq
+    nyquist = 0.5 * (sample_rate)
+    order = 4
+    low = (target_frequency - 50) / nyquist
+    high = (target_frequency + 50) / nyquist
+    b, a = butter(order, [low, high], btype='band')
+    filtered_data = filtfilt(b, a, data)
+    data_in_db = 10 * np.log10(np.abs(filtered_data) + 1e-10)
+    plt.figure(2)
+    plt.plot(t, data_in_db, linewidth=1, alpha=0.7, color='blue')
+    plt.title('Ultra-Low RT Signal')
+    plt.xlabel('Time (s)')
+    plt.ylabel('Power (dB)')
+    index_of_max = np.argmax(data_in_db)
+    value_of_max = data_in_db[index_of_max]
+    plt.plot(t[index_of_max], data_in_db[index_of_max], 'go')
+    sliced_array = data_in_db[index_of_max:]
+    value_of_max_less_5 = value_of_max - 5
+    value_of_max_less_5 = find_nearest_value(sliced_array, value_of_max_less_5)
+    index_of_max_less_5 = np.where(data_in_db == value_of_max_less_5)[0][0]
+    plt.plot(t[index_of_max_less_5], data_in_db[index_of_max_less_5], 'yo')
+    value_of_max_less_25 = value_of_max - 25
+    value_of_max_less_25 = find_nearest_value(sliced_array, value_of_max_less_25)
+    index_of_max_less_25 = np.where(data_in_db == value_of_max_less_25)[0][0]
+    plt.plot(t[index_of_max_less_25], data_in_db[index_of_max_less_25], 'ro')
+    rt20 = t[index_of_max_less_5] - t[index_of_max_less_25]
+    rt60 = 3 * rt20
+    canvas = FigureCanvasTkAgg(plt.gcf(), master=_root)
+    canvas.draw()
+    canvas.get_tk_widget().grid()
+    print(f'The RT60 reverb time at freq {int(target_frequency)}Hz is {round(abs(rt60), 2)} seconds')
+
+#
+def display_intensity():
+    global canvas
+    clear_canvas()
+    sample_rate, data = wavfile.read(file_path)
+    if len(data.shape) == 2:
+        left_channel = data[:, 0]
+        right_channel = data[:, 1]
+        data = (left_channel + right_channel) / 2
+    else:
+        data = data
+    spectrum, freqs, t, im = plt.specgram(data, Fs=sample_rate, NFFT=1024, cmap=plt.get_cmap('autumn_r'))
+    cbar = plt.colorbar(im)
+    plt.xlabel('Time (s)')
+    plt.ylabel('Frequency (Hz)')
+    cbar.set_label('Intensity (dB)')
+    canvas = FigureCanvasTkAgg(plt.gcf(), master=_root)
+    canvas.draw()
+    canvas.get_tk_widget().grid()
+
 
 if __name__ == "__main__": # execute logic if run directly
 
@@ -493,9 +569,13 @@ if __name__ == "__main__": # execute logic if run directly
         _buttons_frame, text='Combined RT60', command=display_comboRT)
     _combo_btn.grid(row=5, column=0, sticky=(W), padx=5)
 
-    _ultra_btn = ttk.Button(
-        _buttons_frame, text='ULTRA Low RT60', command=display_ultra)
-    _ultra_btn.grid(row=6, column=0, sticky=(W), padx=5)
+    _ultralow_btn = ttk.Button(
+        _buttons_frame, text='ULTRA Low RT60', command=display_ultralow)
+    _ultralow_btn.grid(row=6, column=0, sticky=(W), padx=5)
+
+    _intensity_btn = ttk.Button(
+        _buttons_frame, text='Intensity', command=display_intensity)
+    _intensity_btn.grid(row=7, column=0, sticky=(W), padx=5)
 
 #A display frame to display required data. When a file is uploaded, it should update these fields with new data
 # ALL CAPS LINE TO SHOW THE ABOVE IS A HEADING COMMENT. TAKE NOTE.
