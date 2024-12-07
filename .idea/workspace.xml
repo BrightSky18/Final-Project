@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c8686f06-1740-4287-8ade-a01f88e8eb09" name="Changes" comment="Fixed display_waveform to account for left and right channel. Implemented intensity in case it's needed (however may have to set a minimum/floor for spectrum as it can cause a divide by zero error). And implemented display_ultralow.">
+    <list default="true" id="c8686f06-1740-4287-8ade-a01f88e8eb09" name="Changes" comment="Removed some template comments.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinalProjectGUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinalProjectGUI.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +77,7 @@
       <workItem from="1732497017362" duration="2000" />
       <workItem from="1733342213607" duration="2060000" />
       <workItem from="1733434018699" duration="6232000" />
-      <workItem from="1733598706439" duration="858000" />
+      <workItem from="1733598706439" duration="4811000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed file_path in fetch_audio">
       <option name="closed" value="true" />
@@ -118,7 +119,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733527891088</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Removed some template comments.">
+      <option name="closed" value="true" />
+      <created>1733600951786</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1733600951786</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -141,10 +150,11 @@
     <MESSAGE value="Merged Jiovani's branch onto the master branch." />
     <MESSAGE value="Finished combined RT60, still need to do custom graph, and make waveform work with multiple channels" />
     <MESSAGE value="Fixed display_waveform to account for left and right channel. Implemented intensity in case it's needed (however may have to set a minimum/floor for spectrum as it can cause a divide by zero error). And implemented display_ultralow." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed display_waveform to account for left and right channel. Implemented intensity in case it's needed (however may have to set a minimum/floor for spectrum as it can cause a divide by zero error). And implemented display_ultralow." />
+    <MESSAGE value="Removed some template comments." />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed some template comments." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/FinalProject$FinalProjectGUI.coverage" NAME="FinalProjectGUI Coverage Results" MODIFIED="1733527773054" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/FinalProject$FinalProjectGUI.coverage" NAME="FinalProjectGUI Coverage Results" MODIFIED="1733607120088" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Final_Project$FinalProjectGUI.coverage" NAME="FinalProjectGUI Coverage Results" MODIFIED="1733500904863" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from pydub import AudioSegment
 from scipy.signal import butter,filtfilt
+# Canvas is intialized here so it's value can later be modified by the functions.
 canvas=None
 def fetch_audio():
     allowedfiletypes=[('Audio Files','*.mp3;*.wav')]
@@ -53,6 +54,7 @@ def fetch_audio():
     #outputs kHz
     _res.set(Frequency)
 
+#If canvas has a value this function clears it, and it clears the matplotlib plot.
 def clear_canvas():
     global canvas
     if canvas:
@@ -63,7 +65,9 @@ def clear_canvas():
 def display_waveform():
     global canvas
     clear_canvas()
+    ##above code calls the clear_canvas function in case canvas has any data.
     sample_rate, data = wavfile.read(file_path)
+    ##The below if statement checks if the data has a left and right channel, and if does combines them.
     if len(data.shape) == 2:
         left_channel = data[:, 0]
         right_channel = data[:, 1]
@@ -77,12 +81,14 @@ def display_waveform():
     plt.xlabel('Time (s)')
     plt.ylabel('Amplitude (dB)')
     plt.grid(True)
+    ##matplotlib is used to create the plot
     plt.legend()
     canvas=FigureCanvasTkAgg(plt.gcf(), master=_root)
     canvas.draw()
     canvas.get_tk_widget().grid()
+    ##tkinter methods are used to show the graph in the gui.
 
-##Def used for display_lowRT
+##Def used for the display RT's functions.
 def find_nearest_value(array, value):
     array = np.asarray(array)
     idx=(np.abs(array - value)).argmin()
@@ -101,11 +107,12 @@ def display_lowRT():
     t = np.linspace(0,len(data)/sample_rate,len(data), endpoint=False)
     fft_result=np.fft.fft(data)
     spectrum=np.abs(fft_result)
+    ##This code collects the spectrum based on the sound data from the file.
     freqs=np.fft.fftfreq(len(data), d=1/sample_rate)
     freqs=freqs[:len(freqs)//2]
     spectrum=spectrum[:len(spectrum)//2]
 
-    ##find_Target_frequency
+    ##Target frequency is set here
     target=250
     nearest_freq=freqs[np.abs(freqs-target).argmin()] ##End of find_Target_Frequency
     target_frequency=nearest_freq
@@ -135,11 +142,15 @@ def display_lowRT():
     plt.plot(t[index_of_max_less_25], data_in_db[index_of_max_less_25], 'ro')
     rt20=t[index_of_max_less_5]-t[index_of_max_less_25]
     rt60=3*rt20
+    ##RT60 is extrapolated from rt20*3
     canvas = FigureCanvasTkAgg(plt.gcf(), master=_root)
     canvas.draw()
     canvas.get_tk_widget().grid()
 
     print(f'The RT60 reverb time at freq {int(target_frequency)}Hz is {round(abs(rt60),2)} seconds')
+    ##RT60 information is displayed in the console.
+
+    ##The RTReturn functions are modified versions of the display_RT functions that return the frequency,rt60 value, time, and decay curve data for later use in the combined graph function.
 def lowRTReturn():
     global canvas
     clear_canvas()
@@ -353,7 +364,7 @@ def display_highRT():
     canvas.get_tk_widget().grid()
     print(f'The RT60 reverb time at freq {int(target_frequency)}Hz is {round(abs(rt60), 2)} seconds')
 
-def highRTreturn():
+def highRTReturn():
     global canvas
     clear_canvas()
     sample_rate, data = wavfile.read(file_path)
@@ -413,8 +424,10 @@ def display_comboRT():
     clear_canvas()
     LowRT=lowRTReturn()
     MidRT=midRTReturn()
-    HighRT=highRTreturn()
+    HighRT=highRTReturn()
+    ##The RT Return functions are called to provide the needed data.
     fig,ax=plt.subplots()
+    ##Subplots for each graph is created using the data from the Return Functions.
     ax.plot(LowRT["time"], LowRT["decay_curve"], label=f"Low RT ({LowRT['frequency']} Hz)")
     ax.plot(MidRT["time"], MidRT["decay_curve"], label=f"Mid RT ({MidRT['frequency']} Hz)")
     ax.plot(HighRT["time"], HighRT["decay_curve"], label=f"High RT ({HighRT['frequency']} Hz)")
@@ -422,17 +435,18 @@ def display_comboRT():
     ax.set_ylabel('Power (dB)')
     ax.set_title('Combined RT60 Decay Curves')
     ax.legend()
+    ##Graph is made and then displayed in the gui.
     canvas = FigureCanvasTkAgg(plt.gcf(), master=_root)
     canvas.draw()
     canvas.get_tk_widget().grid()
     print(f"RT60 for Low Frequency: {LowRT['rt60']} s")
     print(f"RT60 for Mid frequency: {MidRT['rt60']} s")
     print(f"RT60 for High Frequency: {HighRT['rt60']} s")
+    ##Information for all graphs is then displayed in the console.
 
-
-
+##Custom display RT60 function that shows the data at a frequency of 75hz.
 def display_ultralow():
-    '''Implement a function to graph in a style we choose. Below is a test command. Delete later'''
+
     global canvas
     clear_canvas()
     sample_rate, data = wavfile.read(file_path)
@@ -484,7 +498,7 @@ def display_ultralow():
     canvas.get_tk_widget().grid()
     print(f'The RT60 reverb time at freq {int(target_frequency)}Hz is {round(abs(rt60), 2)} seconds')
 
-#
+##Def that shows the intensity of the data
 def display_intensity():
     global canvas
     clear_canvas()
@@ -495,6 +509,7 @@ def display_intensity():
         data = (left_channel + right_channel) / 2
     else:
         data = data
+    ##Plot is created using the data from the audio file.
     spectrum, freqs, t, im = plt.specgram(data, Fs=sample_rate, NFFT=1024, cmap=plt.get_cmap('autumn_r'))
     cbar = plt.colorbar(im)
     plt.xlabel('Time (s)')
@@ -503,6 +518,7 @@ def display_intensity():
     canvas = FigureCanvasTkAgg(plt.gcf(), master=_root)
     canvas.draw()
     canvas.get_tk_widget().grid()
+    ##Plot is shown in the gui.
 
 
 if __name__ == "__main__": # execute logic if run directly
