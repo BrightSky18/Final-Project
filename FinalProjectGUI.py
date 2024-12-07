@@ -78,10 +78,6 @@ def display_waveform():
     plt.ylabel('Amplitude (dB)')
     plt.grid(True)
     plt.legend()
-    ##plt.show() ##test to show if plot works
-    ##Still need to ensure it works with mp3, can handle multichannel audio, and optionally implement it into the gui.
-
-    #Code below is meant to implement the plot into the gui but is nonfunctional currently.
     canvas=FigureCanvasTkAgg(plt.gcf(), master=_root)
     canvas.draw()
     canvas.get_tk_widget().grid()
@@ -93,7 +89,6 @@ def find_nearest_value(array, value):
     return array[idx]
 
 def display_lowRT():
-    '''Needs to ensure that this displays lowRT correctly, then complete the other defs'''
     global canvas
     clear_canvas()
     sample_rate, data=wavfile.read(file_path)
