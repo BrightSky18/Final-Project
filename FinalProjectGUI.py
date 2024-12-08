@@ -456,6 +456,7 @@ def display_comboRT():
     print(f"RT60 for Low Frequency: {LowRT['rt60']} s")
     print(f"RT60 for Mid frequency: {MidRT['rt60']} s")
     print(f"RT60 for High Frequency: {HighRT['rt60']} s")
+    print(f'Average RT60 is {round(abs(RT60), 2)} seconds')
     ##Information for all graphs is then displayed in the console.
     RT60Dif = (RT60) - 0.5
     _diffRT.set(f'{round(abs(RT60Dif), 2)} seconds')
