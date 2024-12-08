@@ -147,8 +147,12 @@ def display_lowRT():
     canvas.draw()
     canvas.get_tk_widget().grid()
 
-    print(f'The RT60 reverb time at freq {int(target_frequency)}Hz is {round(abs(rt60),2)} seconds')
     ##RT60 information is displayed in the console.
+    print(f'The RT60 reverb time at freq {int(target_frequency)}Hz is {round(abs(rt60),2)} seconds')
+
+    ##The absolute value of RT60 subtracted by 0.5 is found, then displayed in the gui.
+    RT60Dif=abs(rt60)-0.5
+    _diffRT.set(f'{round(abs(RT60Dif),2)} seconds')
 
     ##The RTReturn functions are modified versions of the display_RT functions that return the frequency,rt60 value, time, and decay curve data for later use in the combined graph function.
 def lowRTReturn():
@@ -257,6 +261,8 @@ def display_midRT():
     canvas.draw()
     canvas.get_tk_widget().grid()
     print(f'The RT60 reverb time at freq {int(target_frequency)}Hz is {round(abs(rt60), 2)} seconds')
+    RT60Dif = abs(rt60) - 0.5
+    _diffRT.set(f'{round(abs(RT60Dif), 2)} seconds')
 def midRTReturn():
     global canvas
     clear_canvas()
@@ -363,6 +369,8 @@ def display_highRT():
     canvas.draw()
     canvas.get_tk_widget().grid()
     print(f'The RT60 reverb time at freq {int(target_frequency)}Hz is {round(abs(rt60), 2)} seconds')
+    RT60Dif = abs(rt60) - 0.5
+    _diffRT.set(f'{round(abs(RT60Dif), 2)} seconds')
 
 def highRTReturn():
     global canvas
@@ -419,13 +427,20 @@ def highRTReturn():
     }
 
 def display_comboRT():
-    '''Implement a function to graph in combined RT60 style. Below is a test command. Delete later'''
+
     global canvas
     clear_canvas()
+    ##The RT Return functions are called to provide the needed data.
     LowRT=lowRTReturn()
     MidRT=midRTReturn()
     HighRT=highRTReturn()
-    ##The RT Return functions are called to provide the needed data.
+    #RT60 value is extracted for later use, in finding the difference.
+    LowRT60=LowRT['rt60']
+    MidRT60=MidRT['rt60']
+    HighRT60=HighRT['rt60']
+    ##Average RT60 value is obtained
+    RT60=(LowRT60+MidRT60+HighRT60)/3
+
     fig,ax=plt.subplots()
     ##Subplots for each graph is created using the data from the Return Functions.
     ax.plot(LowRT["time"], LowRT["decay_curve"], label=f"Low RT ({LowRT['frequency']} Hz)")
@@ -443,10 +458,11 @@ def display_comboRT():
     print(f"RT60 for Mid frequency: {MidRT['rt60']} s")
     print(f"RT60 for High Frequency: {HighRT['rt60']} s")
     ##Information for all graphs is then displayed in the console.
+    RT60Dif = (RT60) - 0.5
+    _diffRT.set(f'{round(abs(RT60Dif), 2)} seconds')
 
 ##Custom display RT60 function that shows the data at a frequency of 75hz.
 def display_ultralow():
-
     global canvas
     clear_canvas()
     sample_rate, data = wavfile.read(file_path)
@@ -497,6 +513,8 @@ def display_ultralow():
     canvas.draw()
     canvas.get_tk_widget().grid()
     print(f'The RT60 reverb time at freq {int(target_frequency)}Hz is {round(abs(rt60), 2)} seconds')
+    RT60Dif = abs(rt60) - 0.5
+    _diffRT.set(f'{round(abs(RT60Dif), 2)} seconds')
 
 ##Def that shows the intensity of the data
 def display_intensity():
