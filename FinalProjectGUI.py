@@ -228,7 +228,7 @@ def display_midRT():
     spectrum = spectrum[:len(spectrum) // 2]
 
     ##find_Target_frequency
-    target = 1001
+    target = 1000
     nearest_freq = freqs[np.abs(freqs - target).argmin()]  ##End of find_Target_Frequency
     target_frequency = nearest_freq
     nyquist = 0.5 * (sample_rate)
@@ -318,7 +318,6 @@ def midRTReturn():
         "decay_curve": data_in_db,
     }
 def display_highRT():
-    '''Implement a function to graph in high RT60 style. Below is a test command. Delete later'''
     global canvas
     clear_canvas()
     sample_rate, data = wavfile.read(file_path)
@@ -461,7 +460,7 @@ def display_comboRT():
     RT60Dif = (RT60) - 0.5
     _diffRT.set(f'{round(abs(RT60Dif), 2)} seconds')
 
-##Custom display RT60 function that shows the data at a frequency of 75hz.
+##Custom display RT60 function that shows the data at a frequency of 150hz.
 def display_ultralow():
     global canvas
     clear_canvas()
@@ -480,7 +479,7 @@ def display_ultralow():
     spectrum = spectrum[:len(spectrum) // 2]
 
     ##find_Target_frequency
-    target = 75
+    target = 150
     nearest_freq = freqs[np.abs(freqs - target).argmin()]  ##End of find_Target_Frequency
     target_frequency = nearest_freq
     nyquist = 0.5 * (sample_rate)
